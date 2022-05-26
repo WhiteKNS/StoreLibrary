@@ -56,5 +56,8 @@
     <ClCompile Include="RunServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\StoreLibrary\pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

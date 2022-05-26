@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Purchase.h"
 #include "DatabaseStorage.h"
 #include <fstream>

@@ -14,6 +14,7 @@ char* ConvertStringToCharArray(const std::string& str)
     return cstr;
 }
 
+
 // Fetch the list of all product families
 char* GetAllProductFamilies()
 {
@@ -62,12 +63,10 @@ char* GetProductInformation(const char* id)
     DatabaseStorage* dbStorage = DatabaseStorage::getInstance();
     const std::list<ns::StoreItem>& stored_items = dbStorage->GetStoredItems();
 
-    std::list<ns::StoreItem> all_info;
     for (auto it : stored_items)
     {
         if (it.id == id)
         {
-            all_info.push_back(it);
             results += ns::to_string(it) + " ";
         }
     }
@@ -87,8 +86,8 @@ bool PurchaseProduct(const char* id)
     {
         if (it.id == id)
         {
-            Purchase purchase(it);
-            result = purchase.DoWork();
+            Purchase purchase;
+            result = purchase.DoWork(it);
         }
     }
 

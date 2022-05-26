@@ -27,13 +27,6 @@ const std::string DatabaseStorage::GetDBPath()
     return db_path;
 }
 
-void RunDatabaseSheduler()
-{
-    DatabaseWorker db_worker;
-
-    db_worker.Update();
-}
-
 static std::atomic<DatabaseStorage*> m_instance;
 static std::mutex m_dbmutex;
 
@@ -48,9 +41,6 @@ DatabaseStorage* DatabaseStorage::getInstance()
         if (!sin) {
             sin = new DatabaseStorage();
             m_instance.store(sin, std::memory_order_release);
-
-            std::thread db_thread(RunDatabaseSheduler);
-            db_thread.detach();
         }
     }
 

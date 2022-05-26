@@ -4,11 +4,11 @@
 class Purchase
 {
 public:
-	Purchase(const ns::StoreItem& item);
-	bool DoWork();
+	Purchase();
+	bool DoWork(const ns::StoreItem& item);
 
 private:
-	void PrintReceipt();
+	void PrintReceipt(const ns::StoreItem& item);
 
 	ns::StoreItem m_item;
 };

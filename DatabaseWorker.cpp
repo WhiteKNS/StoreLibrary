@@ -17,7 +17,7 @@ void DatabaseWorker::Update()
 {
 	DatabaseStorage* db_in_memory = DatabaseStorage::getInstance();
 
-	auto previous_clock = Clock::now();
+	auto previous_clock = Clock::now() - Milliseconds(m_update_after_ms);
 
 	while (true)
 	{
@@ -37,7 +37,9 @@ void DatabaseWorker::Update()
 			json j = db_in_memory->GetStoredItems();
 			std::ofstream o(db_in_memory->GetDBPath(), std::ofstream::binary);
 			o << j;
+
+			previous_clock = t1;
 		}
-		previous_clock = t1;
+		
 	}
 }

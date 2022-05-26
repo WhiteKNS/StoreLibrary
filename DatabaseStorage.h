@@ -19,7 +19,7 @@ private:
     std::list<ns::StoreItem> stored_items;
 
 private:
-    const std::string db_path = "../Server/assets/store.json";
+    const std::string db_path = "../StoreLibrary/assets/store.json";
 
 private:
     void AddStoreItem(const ns::StoreItem& item);

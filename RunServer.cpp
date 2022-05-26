@@ -35,7 +35,7 @@ void RunCommand(const Request& request)
     // we would send the respons here
 }
 
-void RunDatabaseSheduler_()
+void RunDatabaseSheduler()
 {
     DatabaseWorker db_worker;
 
@@ -67,7 +67,7 @@ void Run()
         std::cerr << "An error occured while listening to the socket" << std::endl;
 
     int i = 0;
-    //std::vector<std::thread> clients_threads(clients_number);
+    std::vector<std::thread> clients_threads(clients_number);
     while (true) {
         socklen_t addr_size = sizeof(addr_storage);
 
@@ -90,13 +90,13 @@ void Run()
 
 
         std::thread client_thread(RunCommand, *request);
-        //clients_threads.push_back(client_thread);
+        clients_threads.push_back(std::move(client_thread));
         i++;
 
         if (i >= clients_number) {
             i = 0;
             while (i < clients_number) {
-                //clients_threads[i++].join();
+                clients_threads[i++].join();
             }
 
             i = 0;
@@ -107,9 +107,9 @@ void Run()
 
 void InitAndRun()
 {
-    std::thread db_thread(RunDatabaseSheduler_);
+    std::thread db_thread(RunDatabaseSheduler);
     db_thread.detach();
-    Run();
+    //Run();
 }
 
 
@@ -121,6 +121,8 @@ BOOL APIENTRY DllMain(HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
+        InitAndRun();
+        break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:

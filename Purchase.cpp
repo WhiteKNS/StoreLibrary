@@ -4,23 +4,23 @@
 #include "DatabaseStorage.h"
 #include <fstream>
 
-Purchase::Purchase(const ns::StoreItem& item) : m_item(item)
+Purchase::Purchase()
 {
 
 }
 
-bool Purchase::DoWork()
+bool Purchase::DoWork(const ns::StoreItem& item)
 {
 	DatabaseStorage* db_in_memory = DatabaseStorage::getInstance();
-	bool success = db_in_memory->UpdateItem(m_item);
+	bool success = db_in_memory->UpdateItem(item);
 
 	if (success)
-		PrintReceipt();
+		PrintReceipt(item);
 
 	return success;
 }
 
-void Purchase::PrintReceipt()
+void Purchase::PrintReceipt(const ns::StoreItem& item)
 {
 	std::ofstream outfile;
 

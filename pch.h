@@ -8,6 +8,6 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "../StoreLibrary/Products.h"
+#include "Products.h"
 
 #endif //PCH_H

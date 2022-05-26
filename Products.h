@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef SERVER_EXPORTS
+#ifdef STORELIBRARY_EXPORTS
 #define STORELIBRARY_API __declspec(dllexport)
 #else // STORELIBRARY_EXPORTS
 #define STORELIBRARY_API __declspec(dllimport)

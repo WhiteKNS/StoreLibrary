@@ -5,6 +5,7 @@ All dependencies should pull up.
 DatabaseStorage - we store the database in memory. A thread-safe singleton was created.
 Main functions - add item, update item, delete item, get stored items.
 DatabaseStorage doesn't update the .json, it only updates the in_memory data.
+DatabaseStorage is thread safe.
 
 DatabaseWorker is a very simple scheduler which updates .json data every 100ms.
 Reads the data in memory, and updates the .json with new data. Runs in a separate, detached thread.
